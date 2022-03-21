@@ -7,7 +7,7 @@ const start = async () => {
     }
 
     if(!process.env.MONGO_URI){
-        throw new Error('MONGO_URI must be defined')
+        throw new Error('MONGO_URI must be defined');
     }
 
     try {
@@ -23,8 +23,8 @@ const start = async () => {
         console.log('Error: ',error)
     }
 
-    app.listen(8000, () => {
-        console.log('Listening on PORT 8000')
+    app.listen(8001, () => {
+        console.log('Listening on PORT 8001')
     })
 
 }

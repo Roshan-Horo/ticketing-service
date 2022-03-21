@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auth-depl
+  name: forms-depl
 spec: 
   replicas: 1
   selector: 
     matchLabels:
-      app: auth
+      app: forms
   template:
     metadata:
       labels:
-        app: auth
+        app: forms
     spec: 
       containers:
-        - name: auth
-          image: dizit/auth
+        - name: forms
+          image: dizit/forms
           env:
             - name: MONGO_URI
-              value: 'mongodb://auth-mongo-srv:27017/auth'
+              value: 'mongodb://forms-mongo-srv:27017/forms'
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:
@@ -27,12 +27,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-srv
+  name: forms-srv
 spec:
   selector:
-    app: auth
+    app: forms
   ports:
-    - name: auth
+    - name: forms
       protocol: TCP
-      port: 8000
-      targetPort: 8000
+      port: 8001
+      targetPort: 8001

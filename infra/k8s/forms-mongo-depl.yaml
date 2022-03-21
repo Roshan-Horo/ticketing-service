@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: forms-mongo-depl
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: forms-mongo
+  template:
+    metadata:
+      labels: 
+        app: forms-mongo
+    spec:
+      containers:
+        - name: forms-mongo
+          image: mongo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: forms-mongo-srv
+spec:
+  selector:
+    app: forms-mongo
+  ports:
+    - name: db
+      protocol: TCP
+      port: 27017
+      targetPort: 27017

@@ -1,5 +1,5 @@
+import { currentUser } from '@rh_packages/common'
 import express from 'express'
-import { currentUser } from '../midddlewares/current-user'
 
 const router = express.Router()
 

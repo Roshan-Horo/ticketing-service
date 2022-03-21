@@ -7,16 +7,9 @@ metadata:
     nginx-ingress.kubernetes.io/use-regex: 'true'
 spec:
   rules:
-    - host: ticketing.dev
+    - host: collectapp.dev
       http:
         paths:
-          - path: /api/users/signin
-            pathType: Prefix
-            backend:
-              service:
-                name: auth-srv
-                port:
-                  number: 8000
           - path: /api/users/?(.*)
             pathType: Prefix
             backend:
@@ -24,11 +17,11 @@ spec:
                 name: auth-srv
                 port:
                   number: 8000
-          - path: /
+          - path: /api/forms/?(.*)
             pathType: Prefix
             backend:
               service:
-                name: auth-srv
+                name: forms-srv
                 port:
-                  number: 8000
+                  number: 8001
             

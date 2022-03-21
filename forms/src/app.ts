@@ -1,11 +1,9 @@
 import express from 'express'
 import 'express-async-errors'
 import cookieSession from 'cookie-session'
-import { currentUserRouter } from './routes/current-user'
-import { signinRouter } from './routes/signin'
-import { signoutRouter } from './routes/signout'
-import { signupRouter } from './routes/signup'
-import { errorHandler, NotFoundError} from '@rh_packages/common'
+
+import { errorHandler, NotFoundError, currentUser} from '@rh_packages/common'
+import { createFormsRouter } from './routes/new'
 
 const app = express()
 app.set('trust proxy', true)
@@ -15,18 +13,16 @@ app.use(
         signed: false,
         secure: true
     })
-)
+);
+
+app.use(currentUser);
+app.use(createFormsRouter);
 
 // ROUTES
 
 app.get('/',(req,res) => {
     res.send('auth service')
 })
-
-app.use(currentUserRouter)
-app.use(signinRouter)
-app.use(signupRouter)
-app.use(signoutRouter)
 
 
 app.all('*',async (req,res) => {
